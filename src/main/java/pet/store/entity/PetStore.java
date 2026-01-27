@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -28,12 +29,12 @@ private String petStoreName;
 private String petStoreAddress;
 private String petStoreCity;
 private String petStoreState;
-private Long petStoreZip;
-private Long petStorePhone;
+private String petStoreZip;
+private String petStorePhone;
 
 @EqualsAndHashCode.Exclude
 @ToString.Exclude
-@ManyToOne(cascade =CascadeType.PERSIST) 
+@ManyToMany(cascade =CascadeType.PERSIST) 
 @JoinTable(name = "pet_store_customer",joinColumns = @JoinColumn(name ="pet_store_id"), inverseJoinColumns =@JoinColumn(name = "customer_id"))
 Set<Customer> customers = new HashSet<>();
 
