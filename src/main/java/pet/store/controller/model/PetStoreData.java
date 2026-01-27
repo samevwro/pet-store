@@ -3,23 +3,17 @@ package pet.store.controller.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import pet.store.entity.Customer;
 import pet.store.entity.Employee;
 import pet.store.entity.PetStore;
 
-@NoArgsConstructor
+
 @Data
+@NoArgsConstructor
 public class PetStoreData {
 	private Long petStoreId;
-
 	private String petStoreName;
 	private String petStoreAddress;
 	private String petStoreCity;
@@ -27,11 +21,11 @@ public class PetStoreData {
 	private Long petStoreZip;
 	private Long petStorePhone;
 
-	Set<PetStoreCustomer> customers = new HashSet<>();
-	Set<PetStoreEmployee> employees = new HashSet<>();
+	private Set<PetStoreCustomer> customers = new HashSet<>();
+	private Set<PetStoreEmployee> employees = new HashSet<>();
 	
 	
-	public PetStoreData PetStore(PetStore petStore) {
+	public PetStoreData(PetStore petStore){
 		petStoreId = petStore.getPetStoreId();
 		petStoreName = petStore.getPetStoreName();
 		petStoreAddress = petStore.getPetStoreAddress();
@@ -40,27 +34,48 @@ public class PetStoreData {
 		petStoreZip = petStore.getPetStoreZip();
 		petStorePhone = petStore.getPetStorePhone();
 		
-		for(PetStoreEmployee employee : petStore.getEmployees()) {
-			this.employees.add(employee);
+		
+		for(Employee employee : petStore.getEmployees()) {
+			employees.add(new PetStoreEmployee(employee));
+		}
+		for(Customer customer : petStore.getCustomers()) {
+			customers.add(new PetStoreCustomer(customer));
 		}
 	}
 	
-public static class PetStoreCustomer{
+@Data
+@NoArgsConstructor
+static class PetStoreCustomer{
 	
 	private Long customerId;
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerEmail;
 	
+	public PetStoreCustomer(Customer customer) {
+		customerId = customer.getCustomerId();
+		customerFirstName = customer.getCustomerFirstName();
+		customerLastName = customer.getCustomerLastName();
+		customerEmail = customer.getCustomerEmail();
+	}
 }
 
-public static class PetStoreEmployee{
-private Long employeeId;
-	
+@Data
+@NoArgsConstructor
+static class PetStoreEmployee{
+	private Long employeeId;
 	private String employeeFirstName;
 	private String employeeLastName;
 	private Long employeePhone;
 	private String employeeJobTitle;
+	
+	public PetStoreEmployee(Employee employee) {
+		employeeId = employee.getEmployeeId();
+		employeeFirstName = employee.getEmployeeFirstName();
+		employeeLastName = employee.getEmployeeLastName();
+		employeePhone = employee.getEmployeePhone();
+		employeeJobTitle = employee.getEmployeeJobTitle();
+	}
 	
 }
 }
