@@ -2,6 +2,7 @@ package pet.store.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -122,6 +123,11 @@ public class PetStoreService {
 	}
 
 	private Customer findOrCreateCustomer(Long customerId, Long petStoreId) {
+//		Customer customer = findCustomerById(customerId);
+//		for(PetStore petStore : customer.getPetStore) {
+//			
+//		}
+		
 		if(Objects.isNull(petStoreId)) {
 			new NoSuchElementException("Pet store with ID=" + petStoreId + " not found");
 			return null;
@@ -155,8 +161,15 @@ public class PetStoreService {
 	}
 	@Transactional(readOnly = true)
 	public PetStoreData retrievePetStore(Long petStoreId) {
-		PetStore result = findPetStoreById(petStoreId);
+		PetStoreData result = new PetStoreData(findPetStoreById(petStoreId));
+		return result;
+	}
+
+	public Map<String, String> deletePetStoreById(Long petStoreId) {
+		PetStore petStore = findPetStoreById(petStoreId);
+		petStoreDao.delete(petStore);
 		
-		
+		return Map.of(
+				"message", "Pet store with ID=" + petStoreId + " was deleted successfully");
 	}
 	}
