@@ -1,0 +1,53 @@
+Bulldog
+Labrador Retriever
+German Shepherd
+Alaskan Malamute
+Golden Retriever
+Affenpincher
+Airedale Terrier
+French Bulldog
+Australian Cattle Dog
+Poodle
+Afghan Hound
+American Eskimo Dog
+Beagle
+Australian Shepherd
+Chihuahua
+Bichon Frisé
+Yorkshire Terrier
+Border Collie
+American Staffordshire Terrier
+Anatolian Shepherd
+Bernese Mountain Dog
+Boxer
+Bull Terrier
+Cavalier King Charles Spaniel
+Siberian Husky
+Basset Hound
+Pug
+Dachshund
+Boston Terrier
+American Foxhound
+Newfoundland
+Belgian Shepherd
+English Cocker Spaniel
+Rottweiler
+Pomeranian
+Bull Mastiff
+Basenji
+Maltese
+Shih Tzu
+Havanese
+American Hairless Terrier
+Brittany
+Chow Chow
+Saint Bernard
+Great Dane
+Brussels Griffon
+American Water Spaniel
+Pekingese
+Boerboel
+Australian Terrier
+Papillon
+Cairn Terrier
+Silky Terrier
