@@ -111,6 +111,7 @@ public class PetStoreService {
 		
 		copyCustomerFields(customer, petStoreCustomer);
 		
+		customer.getPetStores().add(petStore);
 		petStore.getCustomers().add(customer);
 		Customer savedCustomer = customerDao.save(customer);
 		return new PetStoreCustomer(savedCustomer);
@@ -123,11 +124,7 @@ public class PetStoreService {
 	}
 
 	private Customer findOrCreateCustomer(Long customerId, Long petStoreId) {
-//		Customer customer = findCustomerById(customerId);
-//		for(PetStore petStore : customer.getPetStore) {
-//			
-//		}
-		
+
 		if(Objects.isNull(petStoreId)) {
 			new NoSuchElementException("Pet store with ID=" + petStoreId + " not found");
 			return null;
@@ -135,13 +132,20 @@ public class PetStoreService {
 		if (Objects.isNull(customerId)) {
 			return new Customer();
 		} else {
-			return findCustomerById(customerId);
+			return findCustomerById(customerId, petStoreId);
 		}}
 	}
 
-	private Customer findCustomerById(Long customerId) {
-		return customerDao.findById(customerId).orElseThrow(() -> 
+	private Customer findCustomerById(Long customerId, Long petStoreId) {
+		Customer customer = customerDao.findById(customerId).orElseThrow(() -> 
 		new NoSuchElementException("Customer with Id=" + customerId + " not found"));
+		
+		for(PetStore petStore : customer.getPetStores()) {
+			if(petStore.getPetStoreId().equals(petStoreId)) {
+			
+			}
+		}
+		return customer;
 	}
 	
 	@Transactional(readOnly = true)
@@ -164,7 +168,6 @@ public class PetStoreService {
 		PetStoreData result = new PetStoreData(findPetStoreById(petStoreId));
 		return result;
 	}
-
 	public Map<String, String> deletePetStoreById(Long petStoreId) {
 		PetStore petStore = findPetStoreById(petStoreId);
 		petStoreDao.delete(petStore);
